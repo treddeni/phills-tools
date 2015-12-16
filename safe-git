@@ -1,0 +1,16 @@
+#!/usr/local/bin/bash
+
+# prevent inadvertently pushing to master with git
+
+if [[ "$@" == *push* ]] && [[ "$@" == *master* ]]
+then
+	read -p "Are you sure you want to push to master (type YES to push)? " -r
+	if [[ $REPLY == "YES" ]]
+	then
+		git "$@"
+	else
+		echo Aborted
+	fi	
+else
+    git "$@"
+fi
